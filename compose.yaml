@@ -1,0 +1,32 @@
+services:
+  ui:
+    image: hello-world-ui:latest
+    build:
+      context: https://github.com/BhanuPDas/Hello-World-UI.git#feature-1
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - API_URL=${API_URL}
+      - NODE_ENV=${ENV}
+    depends_on:
+    - backend
+    networks:
+      - app-network
+
+  backend:
+    image: hello-world-backend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:8050"
+    environment:
+      - NODE_ENV=${ENV}
+      - COLOR=${COLOR}
+    networks:
+      - app-network
+  
+networks:
+  app-network:
+    driver: bridge
