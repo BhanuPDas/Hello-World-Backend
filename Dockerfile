@@ -11,5 +11,7 @@ RUN mvn clean compile package
 FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
+ENV NODE_ENV=${ENV}
+ENV COLOR=${COLOR}
 EXPOSE 8050
 ENTRYPOINT ["java", "-jar", "app.jar"]
