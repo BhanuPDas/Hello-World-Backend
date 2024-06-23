@@ -9,18 +9,6 @@ jobs:
   trigger-jenkins:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Check PR branch
-        id: code_build
-        run: |
-          echo "PR branch is ${{ github.head_ref }}"
-          if [[ ! "${{ github.head_ref }}" =~ ^feature/ ]]; then
-            echo "This PR is not from a feature branch."
-            exit 1
-          fi
-
       - name: Install SSH Client and sshpass
         run: |
           sudo apt-get update
