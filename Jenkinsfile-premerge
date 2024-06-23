@@ -13,7 +13,7 @@ pipeline {
         stage('Log into VM') {
             steps {
                 script {
-                    sshagent (VM_SSH_CREDENTIALS) {
+                    sshagent (credentials('VM')) {
                         sh 'ssh -o StrictHostKeyChecking=no dsvm@idial.institute -p 18091 "echo Connected to VM"'
                     }
                 }
