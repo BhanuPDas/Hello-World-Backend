@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        VM_SSH_CREDENTIALS = credentials('VM')
         GIT_CREDENTIALS = credentials('BhanuPDas')
     }
     tools {
@@ -10,15 +9,6 @@ pipeline {
             }
 
     stages {
-        stage('Log into VM') {
-            steps {
-                script {
-                    sshagent (credentials('VM')) {
-                        sh 'ssh -o StrictHostKeyChecking=no dsvm@idial.institute -p 18091 "echo Connected to VM"'
-                    }
-                }
-            }
-        }
 
         stage('Build') {
             steps {

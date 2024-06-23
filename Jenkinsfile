@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        VM_SSH_CREDENTIALS = credentials('VM')
         GIT_CREDENTIALS = credentials('BhanuPDas')
         DOCKER_IMAGE = "hello-world-backend"
         DOCKER_USER = "bhanupdas"
@@ -14,20 +13,6 @@ pipeline {
             }
 
     stages {
-        stage('Log into VM') {
-        when {
-            expression {
-               env.BRANCH_NAME == 'develop'
-            }
-        }
-            steps {
-                script {
-                    sshagent (credentials('VM')) {
-                        sh 'ssh -o StrictHostKeyChecking=no dsvm@idial.institute -p 18091 "echo Connected to VM"'
-                    }
-                }
-            }
-        }
 
         stage('Build') {
         when {
