@@ -33,4 +33,4 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "java -jar /path/to/jenkins-cli.jar -s http://localhost:8080/jenkins build hello-world-backend-premerge"
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "java -jar /home/dsvm/jenkins-cli.jar -s http://localhost:8080/jenkins build hello-world-backend-premerge"
