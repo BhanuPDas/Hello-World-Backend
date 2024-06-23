@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    environment {
+        VM_SSH_CREDENTIALS = credentials('VM')
+        GIT_CREDENTIALS = credentials('BhanuPDas')
+    }
+    tools {
+                maven 'Maven'
+            }
+
+    stages {
+        stage('Log into VM') {
+            steps {
+                script {
+                    sshagent (VM_SSH_CREDENTIALS) {
+                        sh 'ssh -o StrictHostKeyChecking=no dsvm@idial.institute -p 18091 "echo Connected to VM"'
+                    }
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline has completed"
+        }
+    }
+}
