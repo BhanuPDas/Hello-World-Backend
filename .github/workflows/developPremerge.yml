@@ -1,0 +1,30 @@
+name: Develop-Premerge
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code build
+        id: code_build
+        run: |
+          echo "PR branch is ${{ github.head_ref }}"
+          if [[ "${{ github.head_ref }}" != feature/* ]]; then
+            echo "This PR is not from a feature branch."
+            exit 1
+          fi
+
+      - name: Install SSH Client and sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client sshpass
+
+      - name: Trigger-Jenkins
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'Triggering Jenkins Job'"
