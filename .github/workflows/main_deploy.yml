@@ -1,4 +1,4 @@
-name: Develop-Postmerge
+name: main-Postmerge
 
 on:
   push:
