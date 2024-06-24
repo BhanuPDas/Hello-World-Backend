@@ -182,7 +182,6 @@ pipeline {
             expression {
                env.BRANCH_NAME == 'main'
             }
-             cron('0 21 * * *')
         }
             steps {
                 script {
