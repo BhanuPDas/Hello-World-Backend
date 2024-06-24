@@ -9,16 +9,13 @@ jobs:
   trigger-jenkins:
     runs-on: ubuntu-latest
     steps:
-      - name: Install SSH Client and sshpass
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openssh-client sshpass
-
       - name: Trigger Jenkins Job
         env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
+          JENKINS_URL: ${{ secrets.JENKINS_URL }}
+          JENKINS_USER: ${{ secrets.JENKINS_USER }}
+          JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
         run: |
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "java -jar /home/dsvm/jenkins-cli.jar -s http://localhost:8080/jenkins build hello-world-backend-develop"
+          JENKINS_CRUMB=$(curl -u "$JENKINS_USER:$JENKINS_API_TOKEN" "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
+          curl -X POST "$JENKINS_URL/job/hello-world-backend-develop/" \
+            --user "$JENKINS_USER:$JENKINS_API_TOKEN" \
+            -H "$JENKINS_CRUMB"
