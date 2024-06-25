@@ -109,7 +109,7 @@ pipeline {
         }
             steps {
             	script{
-                sh 'mvn --batch-mode release:prepare release:perform'
+                sh 'mvn --batch-mode release:prepare -Dusername=BhanuPDas -Dpassword=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 release:perform'
                 // Merge release branch to main branch
                     sshagent (credentials('BhanuPDas')) {
                         sh '''
