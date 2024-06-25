@@ -107,22 +107,13 @@ pipeline {
                branch "develop"
         }
             steps {
-            	script{
-                // Merge release branch to main branch
-                    sshagent (credentials('BhanuPDas')) {
-                        sh '''
-                            git checkout main
-                            git merge --no-ff release
-                            git push origin main
-                        '''
-                    }
-               }
+            	echo "Code is merged to Main branch."
             }
         }
         
         stage('Deploy-Stage') {
         when {
-               branch "main"
+               branch "develop"
         }
             steps {
                 script {
@@ -157,7 +148,7 @@ pipeline {
         
         stage('Deploy-Prod') {
         when {
-               branch "main"
+               branch "develop"
         }
             steps {
                 script {
