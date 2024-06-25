@@ -20,15 +20,15 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+	<scm>
+		<connection>scm:git:https://BhanuPDas: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@github.com/BhanuPDas/Hello-World-Backend.git</connection>
+		<developerConnection>scm:git:https://BhanuPDas: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@github.com/BhanuPDas/Hello-World-Backend.git</developerConnection>
+		<url>https://github.com/BhanuPDas/Hello-World-Backend</url>
+	  <tag>HEAD</tag>
+    </scm>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -50,6 +50,30 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<projectVersionPolicyId>default</projectVersionPolicyId>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>2.0.1</version>
+				<configuration>
+					<connectionType>developerConnection</connectionType>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

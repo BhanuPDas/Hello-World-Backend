@@ -94,8 +94,7 @@ pipeline {
                     
                     def response = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:8051/actuator/health', returnStdout: true).trim()
                     if (response != '200') {
-                        echo "Smoke test failed. Errors in Service. Need to Rollback"
-                        
+                        echo "Smoke test failed. Errors in Service. Need to Rollback"           
                     } else {
                         echo "Smoke test passed."
                     }
@@ -109,7 +108,7 @@ pipeline {
         }
             steps {
             	script{
-                sh 'mvn --batch-mode release:prepare release:perform'
+                sh 'mvn --batch-mode release:prepare -Dusername=BhanuPDas -Dpassword=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 release:perform'
                 // Merge release branch to main branch
                     sshagent (credentials('BhanuPDas')) {
                         sh '''
