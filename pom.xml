@@ -24,8 +24,8 @@
 		<java.version>21</java.version>
 	</properties>
 	<scm>
-		<connection>scm:git:https://github.com/BhanuPDas/Hello-World-Backend.git</connection>
-		<developerConnection>scm:git:https://github.com/BhanuPDas/Hello-World-Backend.git</developerConnection>
+		<connection>scm:git:https://BhanuPDas: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@github.com/BhanuPDas/Hello-World-Backend.git</connection>
+		<developerConnection>scm:git:https://BhanuPDas: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@github.com/BhanuPDas/Hello-World-Backend.git</developerConnection>
 		<url>https://github.com/BhanuPDas/Hello-World-Backend</url>
 	  <tag>HEAD</tag>
     </scm>
