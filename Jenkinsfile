@@ -6,7 +6,7 @@ pipeline {
         DOCKER_USER = "bhanupdas"
         DOCKER_PWD = "Midtown@12"
         DOCKERBUILD = "${env.BUILD_NUMBER}"
-        DOCKERPATH = "bhanupdas/"
+        DOCKERPATH = "bhanupdas/hello-world-backend"
     }
     tools {
                 maven 'Maven'
